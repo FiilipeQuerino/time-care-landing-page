@@ -23,21 +23,73 @@
     }
 
     header {
-      text-align: center;
-      padding: 6rem 1rem 4rem;
+        background: linear-gradient(135deg, var(--bege) 0%, var(--rosa-pastel) 100%); /* Fundo suave */
+        padding: 6rem 1rem 4rem;
+        /* Remove text-align: center; para o layout em duas colunas */
+    }
+
+    /* Novo container para o conteúdo do cabeçalho */
+    .header-content {
+        display: flex;
+        align-items: center; /* Alinha verticalmente */
+        justify-content: space-between;
+        max-width: 1100px;
+        margin: 0 auto;
+        gap: 2rem;
+    }
+
+    /* Coluna de texto (lado esquerdo) */
+    .header-text {
+        max-width: 500px;
+        text-align: left;
     }
 
     header h1 {
-      font-size: 2.2rem;
-      color: var(--texto);
-      margin-bottom: 1rem;
+        font-size: 3.5rem; /* Aumenta o tamanho da fonte */
+        color: var(--texto);
+        margin-bottom: 0.5rem; /* Diminui um pouco o espaçamento */
+        line-height: 1.1; /* Melhora a leitura do título */
     }
 
     header p {
-      color: var(--cinza);
-      max-width: 600px;
-      margin: 0 auto;
-      font-size: 1rem;
+        color: var(--cinza);
+        font-size: 1.2rem; /* Aumenta a fonte da descrição */
+        margin: 0; /* Remove margem desnecessária */
+        font-weight: 300;
+    }
+
+    /* Placeholder para Imagem (lado direito) */
+    .header-image {
+        width: 400px;
+        height: 300px;
+        background-color: var(--rosa-claro); /* Cor temporária */
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 500;
+        flex-shrink: 0; /* Impede que a imagem encolha demais */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    }
+
+    .cta-btn {
+        margin-top: 2rem;
+        background-color: var(--rosa-claro);
+        border: none;
+        color: white;
+        padding: 1rem 2.5rem; /* Aumenta um pouco o padding */
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600; /* Mais peso na fonte */
+        transition: 0.3s;
+        box-shadow: 0 4px 10px rgba(241, 182, 200, 0.6); /* Sombra no botão */
+    }
+
+    .cta-btn:hover { 
+        background-color: var(--rosa-pastel); 
+        color: var(--texto); 
+        box-shadow: 0 6px 15px rgba(241, 182, 200, 0.8);
     }
 
     .cta-btn {
@@ -190,49 +242,89 @@
       .footer-content { flex-direction: column; text-align: center; }
       .footer-links a { justify-content: center; }
     }
+
+    @media (max-width: 900px) {
+      .header-content {
+          flex-direction: column; /* Empilha as colunas em telas menores */
+          text-align: center;
+      }
+
+      .header-text {
+          text-align: center;
+          max-width: 100%;
+      }
+
+      header h1 {
+          font-size: 2.8rem;
+      }
+
+      header p {
+          font-size: 1.1rem;
+      }
+
+      .header-image {
+          margin-top: 3rem;
+          width: 90%;
+          max-width: 450px;
+          height: 250px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>TimeCare</h1>
-    <p>Solução digital para clínicas crescerem e se organizarem.</p>
-    <button class="cta-btn">Saiba mais</button>
+      <div class="header-content">
+          <div class="header-text">
+              <h1>O Software Inteligente que Faz Sua Clínica Crescer.</h1>
+              <p>**TimeCare** é a solução digital completa para organizar agendamentos, clientes e finanças, dando a você mais tempo para cuidar do que realmente importa.</p>
+              <button class="cta-btn">Comece Seu Teste Grátis Agora</button>
+          </div>
+          <div class="header-image">
+              <img src="img/tablet.png" alt="Mockup do aplicativo TimeCare mostrando a interface de agenda" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+          </div>
+      </div>
   </header>
 
   <section class="features">
-    <h2>Funcionalidades que fazem a diferença</h2>
-    <div class="feature-grid">
-      <div class="feature">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10m-10 4h6m-9 5h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z" /></svg>
-        <h3>Agenda inteligente</h3>
-        <p>Agende horários com rapidez e evite conflitos. Mais organização no seu dia.</p>
+      <h2>Funcionalidades que fazem a diferença</h2>
+      <div class="feature-grid">
+          <div class="feature">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10m-10 4h6m-9 5h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z" /></svg>
+              <h3>Agenda inteligente</h3>
+              <p>Agende horários com rapidez e evite conflitos. Mais organização no seu dia.</p>
+          </div>
+          <div class="feature">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9 7V3" /></svg>
+              <h3>Gestão financeira</h3>
+              <p>Acompanhe receitas, despesas e relatórios em tempo real. Controle total das finanças.</p>
+          </div>
+          <div class="feature">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+              <h3>Cadastro de clientes</h3>
+              <p>Tenha histórico e preferências de cada cliente para um atendimento personalizado.</p>
+          </div>
+          <div class="feature">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+              </svg>
+              <h3>Multíusuário</h3>
+              <p>Cada profissional com sua conta e agenda. Mais praticidade para equipes.</p>
+          </div>
+          <div class="feature">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25M9 16.5v.75m3-3v3M15 12v5.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+              </svg>
+              <h3>Relatórios completos</h3>
+              <p>Gere relatórios detalhados de atendimentos, faturamento e desempenho da clínica.</p>
+          </div>
+          <div class="feature">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+              </svg>
+              <h3>Controle de estoque</h3>
+              <p>Gerencie produtos e insumos, evitando faltas e otimizando o funcionamento.</p>
+          </div>
       </div>
-      <div class="feature">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9 7V3" /></svg>
-        <h3>Gestão financeira</h3>
-        <p>Acompanhe receitas, despesas e relatórios em tempo real. Controle total das finanças.</p>
-      </div>
-      <div class="feature">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-        <h3>Cadastro de clientes</h3>
-        <p>Tenha histórico e preferências de cada cliente para um atendimento personalizado.</p>
-      </div>
-      <div class="feature">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-        <h3>Multíusuário</h3>
-        <p>Cada profissional com sua conta e agenda. Mais praticidade para equipes.</p>
-      </div>
-      <div class="feature">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-        <h3>Relatórios completos</h3>
-        <p>Gere relatórios detalhados de atendimentos, faturamento e desempenho da clínica.</p>
-      </div>
-      <div class="feature">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-        <h3>Controle de estoque</h3>
-        <p>Gerencie produtos e insumos, evitando faltas e otimizando o funcionamento.</p>
-      </div>
-    </div>
   </section>
 
   <section class="pricing">
