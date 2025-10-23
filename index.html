@@ -257,10 +257,48 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
+    /* --- RESPONSIVIDADE --- */
+    @media (max-width: 1024px) {
+      header h1 { font-size: 2.8rem; }
+      header p { font-size: 1.1rem; }
+      .header-image { width: 380px; height: 280px; }
+    }
+
     @media (max-width: 768px) {
-      header h1 { font-size: 2rem; }
-      .footer-content { flex-direction: column; text-align: center; }
-      .footer-links a { justify-content: center; }
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.5rem;
+      }
+
+      .header-text {
+        text-align: center;
+        min-width: auto;
+        max-width: 90%;
+      }
+
+      header h1 {
+        font-size: 2.3rem;
+        line-height: 1.2;
+      }
+
+      header p {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      .cta-btn {
+        width: 90%;
+        max-width: 320px;
+        font-size: 1rem;
+      }
+
+      .header-image {
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        aspect-ratio: 4/3;
+      }
     }
 
     @media (max-width: 900px) {
@@ -287,6 +325,21 @@
           width: 95%;
           max-width: 500px;
           height: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 4rem 1rem 3rem;
+      }
+
+      header h1 {
+        font-size: 1.9rem;
+      }
+
+      .cta-btn {
+        font-size: 0.95rem;
+        padding: 0.8rem 2rem;
       }
     }
   </style>
@@ -420,11 +473,10 @@
       }
   }
 
-  // Estilo da descrição com cursor rosa
   typedDesc.style.color = "#666";
-  typedDesc.style.borderRight = "2px solid #F1B6C8"; // cursor rosa
+  typedDesc.style.borderRight = "2px solid #F1B6C8";
   typedDesc.style.paddingRight = "5px";
-  typedDesc.style.whiteSpace = "pre-wrap"; // garante que quebras de linha funcionem
+  typedDesc.style.whiteSpace = "pre-wrap";
 
   typeDesc();
 </script>
