@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeCare - Solução digital para clínicas crescerem e se organizarem</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rosa-pastel: #f8d6e0;
+      --rosa-claro: #f1b6c8;
+      --bege: #f9f5f2;
+      --texto: #333;
+      --cinza: #666;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--texto);
+      background-color: var(--bege);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 6rem 1rem 4rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--texto);
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      color: var(--cinza);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+
+    .cta-btn {
+      margin-top: 2rem;
+      background-color: var(--rosa-claro);
+      border: none;
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .cta-btn:hover { background-color: var(--rosa-pastel); color: var(--texto); }
+
+    /* Funcionalidades */
+    .features {
+      padding: 4rem 1rem;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .features h2 {
+      font-size: 1.8rem;
+      margin-bottom: 3rem;
+      color: var(--texto);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background-color: var(--bege);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: 0.3s;
+    }
+
+    .feature:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+    .feature svg {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1rem;
+      stroke: var(--rosa-claro);
+    }
+
+    .feature h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+    .feature p { font-size: 0.95rem; color: var(--cinza); }
+
+    /* Planos */
+    .pricing {
+      background-color: var(--bege);
+      padding: 5rem 1rem;
+      text-align: center;
+    }
+
+    .pricing h2 {
+      font-size: 1.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .plan {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid #eee;
+      transition: 0.3s;
+    }
+
+    .plan:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+    .plan h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+    .plan p { font-size: 0.95rem; color: var(--cinza); margin-bottom: 1rem; }
+
+    .plan strong { font-size: 1.6rem; color: var(--texto); }
+
+    .plan button {
+      margin-top: 1.5rem;
+      background-color: var(--rosa-claro);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 0.8rem 1.8rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .plan button:hover { background-color: var(--rosa-pastel); color: var(--texto); }
+
+    /* FOOTER */
+    footer {
+      background-color: #fff;
+      padding: 4rem 1rem 2rem;
+      border-top: 1px solid #eee;
+      color: var(--texto);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto 2rem;
+    }
+
+    .footer-column h4 {
+      color: var(--rosa-claro);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cinza);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--rosa-claro); }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--cinza);
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      .footer-content { flex-direction: column; text-align: center; }
+      .footer-links a { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TimeCare</h1>
+    <p>Solução digital para clínicas crescerem e se organizarem.</p>
+    <button class="cta-btn">Saiba mais</button>
+  </header>
+
+  <section class="features">
+    <h2>Funcionalidades que fazem a diferença</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10m-10 4h6m-9 5h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z" /></svg>
+        <h3>Agenda inteligente</h3>
+        <p>Agende horários com rapidez e evite conflitos. Mais organização no seu dia.</p>
+      </div>
+      <div class="feature">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9 7V3" /></svg>
+        <h3>Gestão financeira</h3>
+        <p>Acompanhe receitas, despesas e relatórios em tempo real. Controle total das finanças.</p>
+      </div>
+      <div class="feature">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+        <h3>Cadastro de clientes</h3>
+        <p>Tenha histórico e preferências de cada cliente para um atendimento personalizado.</p>
+      </div>
+      <div class="feature">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+        <h3>Multíusuário</h3>
+        <p>Cada profissional com sua conta e agenda. Mais praticidade para equipes.</p>
+      </div>
+      <div class="feature">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+        <h3>Relatórios completos</h3>
+        <p>Gere relatórios detalhados de atendimentos, faturamento e desempenho da clínica.</p>
+      </div>
+      <div class="feature">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+        <h3>Controle de estoque</h3>
+        <p>Gerencie produtos e insumos, evitando faltas e otimizando o funcionamento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <h2>Planos para cada fase da sua clínica</h2>
+    <div class="plan-grid">
+      <div class="plan">
+        <h3>Essencial</h3>
+        <p>Funcionalidades básicas para começar sem custo.</p>
+        <strong>R$0/mês</strong>
+        <p>Por profissional</p>
+        <button>Começar grátis</button>
+      </div>
+      <div class="plan">
+        <h3>Básico</h3>
+        <p>Agendamentos, clientes e relatórios para crescer.</p>
+        <strong>R$19/mês</strong>
+        <p>Por profissional</p>
+        <button>Testar grátis</button>
+      </div>
+      <div class="plan">
+        <h3>Avançado</h3>
+        <p>Recursos completos e suporte prioritário.</p>
+        <strong>R$50/mês</strong>
+        <p>Por profissional</p>
+        <button>Testar grátis</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>TimeCare</h4>
+        <p>Organize sua clínica com tecnologia e facilidade.</p>
+      </div>
+
+      <div class="footer-column footer-links">
+        <h4>Contato</h4>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        <a href="#"><i class="fa-solid fa-phone"></i> Telefone</a>
+        <a href="#"><i class="fa-solid fa-envelope"></i> E-mail</a>
+      </div>
+
+      <div class="footer-column footer-links">
+        <h4>Redes sociais</h4>
+        <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 TimeCare. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
