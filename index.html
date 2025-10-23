@@ -40,8 +40,14 @@
 
     /* Coluna de texto (lado esquerdo) */
     .header-text {
+        min-width: 500px;
         max-width: 500px;
         text-align: left;
+    }
+
+    #typed-desc {
+      max-width: 500px; /* largura máxima do texto */
+      min-height: 125px; /* altura mínima para que não pule enquanto digita */
     }
 
     header h1 {
@@ -237,6 +243,20 @@
       color: var(--cinza);
     }
 
+    .header-image {
+      width: 500px;
+      height: 350px;
+      background-color: var(--rosa-claro);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 500;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
     @media (max-width: 768px) {
       header h1 { font-size: 2rem; }
       .footer-content { flex-direction: column; text-align: center; }
@@ -264,9 +284,9 @@
 
       .header-image {
           margin-top: 3rem;
-          width: 90%;
-          max-width: 450px;
-          height: 250px;
+          width: 95%;
+          max-width: 500px;
+          height: 300px;
       }
     }
   </style>
@@ -276,8 +296,8 @@
       <div class="header-content">
           <div class="header-text">
               <h1>O Software Inteligente que Faz Sua Clínica Crescer.</h1>
-              <p>**TimeCare** é a solução digital completa para organizar agendamentos, clientes e finanças, dando a você mais tempo para cuidar do que realmente importa.</p>
-              <button class="cta-btn">Comece Seu Teste Grátis Agora</button>
+              <p id="typed-desc"></p>
+              <button class="cta-btn" onclick="window.location.href='https://seuapp.com/cadastro'">Comece Seu Teste Grátis Agora</button>
           </div>
           <div class="header-image">
               <img src="img/tablet.png" alt="Mockup do aplicativo TimeCare mostrando a interface de agenda" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
@@ -363,7 +383,7 @@
 
       <div class="footer-column footer-links">
         <h4>Contato</h4>
-        <a href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://wa.me/5548996193227"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
         <a href="#"><i class="fa-solid fa-phone"></i> Telefone</a>
         <a href="#"><i class="fa-solid fa-envelope"></i> E-mail</a>
       </div>
@@ -371,7 +391,6 @@
       <div class="footer-column footer-links">
         <h4>Redes sociais</h4>
         <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
-        <a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
       </div>
     </div>
 
@@ -381,3 +400,33 @@
   </footer>
 </body>
 </html>
+
+<script>
+  const descText = "TimeCare é a solução digital completa para <br>organizar agendamentos, clientes e finanças, dando a você mais tempo para cuidar do que realmente importa.";
+
+  const typedDesc = document.getElementById("typed-desc");
+  let descIndex = 0;
+
+  function typeDesc() {
+      if(descIndex < descText.length){
+          // Adiciona letra por letra, mas interpreta <br> como quebra de linha
+          if(descText.substr(descIndex, 4) === "<br>") {
+              typedDesc.innerHTML += "<br>";
+              descIndex += 4;
+          } else {
+              typedDesc.innerHTML += descText.charAt(descIndex);
+              descIndex++;
+          }
+          setTimeout(typeDesc, 50);
+      }
+  }
+
+  // Estilo da descrição com cursor rosa
+  typedDesc.style.color = "#666";
+  typedDesc.style.borderRight = "2px solid #F1B6C8"; // cursor rosa
+  typedDesc.style.paddingRight = "5px";
+  typedDesc.style.whiteSpace = "pre-wrap"; // garante que quebras de linha funcionem
+
+  typeDesc();
+</script>
+
