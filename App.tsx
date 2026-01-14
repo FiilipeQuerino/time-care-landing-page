@@ -5,7 +5,6 @@ import { Features } from './components/Features';
 import { Pricing } from './components/Pricing';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { GeminiAIAssistant } from './components/GeminiAIAssistant';
 
 const App: React.FC = () => {
   return (
@@ -16,19 +15,6 @@ const App: React.FC = () => {
           <Hero />
         </section>
 
-        {/* AI Assistant Integration */}
-        <section className="py-20 bg-stone-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-bold text-rose-900 mb-4 font-display">Inovação com IA</h2>
-              <p className="text-stone-500 max-w-2xl mx-auto text-lg font-light">
-                Potencialize sua clínica com nosso assistente inteligente. Crie scripts, campanhas e conteúdos em segundos.
-              </p>
-            </div>
-            <GeminiAIAssistant />
-          </div>
-        </section>
-        
         <section id="funcionalidades" className="py-20 bg-white">
           <Features />
         </section>
