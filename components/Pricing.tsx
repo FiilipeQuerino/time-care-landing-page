@@ -1,137 +1,103 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { Check } from 'lucide-react';
+import { PLANS } from '../constants';
+import { BillingCycle, Plan } from '../types';
 
-const RevealPlan: React.FC<{ children: React.ReactNode; delay: number }> = ({ children, delay }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+interface PricingProps {
+  onSelectPlan: (plan: Plan, cycle: BillingCycle) => void;
+}
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+const Pricing: React.FC<PricingProps> = ({ onSelectPlan }) => {
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>('annual');
 
   return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform ${
-        isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
-      }`}
-    >
-      {children}
-    </div>
-  );
-};
-
-const plans = [
-  {
-    name: "Essencial",
-    price: "19",
-    description: "Funcionalidades básicas para começar sem custo.",
-    features: [
-      "Agenda Inteligente",
-      "Cadastro de Clientes",
-      "Histórico Básico",
-      "Suporte via E-mail"
-    ],
-    cta: "Testar grátis",
-    popular: false
-  },
-  {
-    name: "Básico",
-    price: "25",
-    description: "Agendamentos, clientes e relatórios para crescer.",
-    features: [
-      "Tudo do Essencial",
-      "Relatórios de Faturamento",
-      "Gestão Financeira",
-      "Controle de Estoque",
-      "Suporte via WhatsApp"
-    ],
-    cta: "Testar grátis",
-    popular: true
-  },
-  {
-    name: "Avançado",
-    price: "50",
-    description: "Recursos completos e suporte prioritário para equipes.",
-    features: [
-      "Tudo do Básico",
-      "Multiusuário Ilimitado",
-      "Relatórios Avançados",
-      "Backup em Nuvem",
-      "Treinamento VIP"
-    ],
-    cta: "Testar grátis",
-    popular: false
-  }
-];
-
-export const Pricing: React.FC = () => {
-  return (
-    <div className="container mx-auto px-4">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold text-stone-800 mb-4 font-display">Planos para cada fase da sua clínica</h2>
-        <p className="text-stone-500 max-w-2xl mx-auto text-lg font-light">
-          Escolha o investimento ideal para sua tranquilidade e profissionalismo.
-        </p>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {plans.map((plan, index) => (
-          <RevealPlan key={index} delay={index * 150}>
-            <div 
-              className={`h-full p-10 rounded-[3rem] bg-white border-2 transition-all ${
-                plan.popular 
-                ? 'border-rose-300 shadow-2xl md:scale-105 z-10' 
-                : 'border-stone-50 shadow-sm'
-              }`}
+    <section id="pricing" className="py-24 px-4 bg-rose-50/50">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-slate-900 mb-6">
+            Planos simples e transparentes
+          </h2>
+          
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <span className={`text-sm font-semibold ${billingCycle === 'monthly' ? 'text-slate-900' : 'text-slate-500'}`}>Mensal</span>
+            <button 
+              onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
+              className="w-14 h-8 bg-rose-200 rounded-full relative p-1 transition-colors hover:bg-rose-300"
             >
-              <h3 className="text-2xl font-bold text-stone-800 mb-2 font-display">{plan.name}</h3>
-              <div className="mb-4">
-                <span className="text-stone-400 text-lg">R$</span>
-                <span className="text-5xl font-bold text-stone-800 mx-1">{plan.price}</span>
-                <span className="text-stone-400 text-sm">/mês</span>
-              </div>
-              <p className="text-stone-400 text-xs mb-8 uppercase tracking-widest font-bold">Por profissional</p>
-              <p className="text-stone-500 mb-8 text-sm leading-relaxed">{plan.description}</p>
-              <ul className="space-y-4 mb-10">
-                {plan.features.map((feature, fIndex) => (
-                  <li key={fIndex} className="flex items-center gap-3 text-stone-600 text-sm">
-                    <svg className="w-4 h-4 text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <button 
-                onClick={() => window.location.href='https://time-care-web.vercel.app/'}
-                className={`w-full py-4 rounded-full font-bold transition-all shadow-lg ${
-                  plan.popular 
-                  ? 'bg-rose-400 text-white hover:bg-rose-500 shadow-rose-100' 
-                  : 'bg-stone-50 text-stone-700 hover:bg-stone-100'
+              <div className={`w-6 h-6 bg-rose-600 rounded-full shadow-md transition-transform duration-300 ${billingCycle === 'annual' ? 'translate-x-6' : 'translate-x-0'}`} />
+            </button>
+            <div className="flex items-center gap-2">
+              <span className={`text-sm font-semibold ${billingCycle === 'annual' ? 'text-slate-900' : 'text-slate-500'}`}>Anual</span>
+              <span className="bg-emerald-100 text-emerald-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                2 Meses Grátis
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {PLANS.map((plan) => {
+            const price = billingCycle === 'monthly' ? plan.monthlyPrice : (plan.annualPrice / 12);
+            const displayPrice = price.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+            return (
+              <div 
+                key={plan.id}
+                className={`relative p-8 rounded-[2rem] flex flex-col transition-all duration-300 ${
+                  plan.isPopular 
+                    ? 'bg-white shadow-2xl shadow-rose-200 border-2 border-rose-400 scale-105 z-10' 
+                    : 'bg-white border border-rose-100 hover:shadow-xl'
                 }`}
               >
-                {plan.cta}
-              </button>
-            </div>
-          </RevealPlan>
-        ))}
+                {plan.isPopular && (
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-rose-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                    Mais Escolhido
+                  </div>
+                )}
+                
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{plan.name}</h3>
+                  <p className="text-sm text-slate-500 mb-6 min-h-[40px]">{plan.description}</p>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-slate-500 text-lg font-medium">R$</span>
+                    <span className="text-5xl font-bold text-slate-900 tracking-tight">{displayPrice}</span>
+                    <span className="text-slate-500 font-medium">/mês</span>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-2">
+                    {billingCycle === 'annual' ? `Cobrado anualmente (R$ ${plan.annualPrice}/ano)` : 'Por profissional'}
+                  </p>
+                </div>
+
+                <div className="space-y-4 mb-8 flex-1">
+                  {plan.features.map((feature, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="mt-1 p-0.5 bg-rose-100 rounded-full">
+                        <Check className="w-3.5 h-3.5 text-rose-600" />
+                      </div>
+                      <span className="text-sm text-slate-600 leading-tight">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <button 
+                  onClick={() => onSelectPlan(plan, billingCycle)}
+                  className={`w-full py-4 rounded-2xl font-bold transition-all ${
+                    plan.isPopular 
+                      ? 'bg-rose-500 text-white hover:bg-rose-600 shadow-lg shadow-rose-200' 
+                      : 'bg-rose-50 text-rose-600 hover:bg-rose-100'
+                  }`}
+                >
+                  {plan.hasTrial ? 'Testar Grátis 7 Dias' : 'Assinar Agora'}
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
+
+export default Pricing;

@@ -1,129 +1,96 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { ChevronRight, Sparkles, Play } from 'lucide-react';
 
-export const Hero: React.FC = () => {
-  const [typedText, setTypedText] = useState('');
-  const [isCursorVisible, setIsCursorVisible] = useState(true);
-  const fullText = "TimeCare é a solução digital completa para organizar agendamentos, clientes e finanças, dando a você mais tempo para cuidar do que realmente importa.";
+interface HeroProps {
+  onStart: () => void;
+  onViewDemo: () => void;
+}
 
-  // Efeito de Digitação
-  useEffect(() => {
-    let currentText = '';
-    let currentIndex = 0;
-    // Fix: Using 'any' for the timeout identifier to prevent "Namespace 'global.NodeJS' has no exported member 'Timeout'" error in browser environments.
-    let timeoutId: any;
-
-    const type = () => {
-      if (currentIndex < fullText.length) {
-        currentText += fullText[currentIndex];
-        setTypedText(currentText);
-        currentIndex++;
-        
-        // Pausa maior em pontuações para um ritmo mais humano
-        const char = fullText[currentIndex - 1];
-        const delay = char === ',' || char === '.' ? 400 : 35;
-        
-        timeoutId = setTimeout(type, delay);
-      }
-    };
-
-    // Atraso inicial para começar a digitar após o carregamento da página
-    const startTimeout = setTimeout(type, 800);
-
-    return () => {
-      clearTimeout(startTimeout);
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
-  // Efeito do Cursor Piscando
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsCursorVisible(prev => !prev);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
-
+const Hero: React.FC<HeroProps> = ({ onStart, onViewDemo }) => {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-[#f9f5f2] to-[#f8d6e0] pt-16 pb-20 md:pt-28 md:pb-32">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          <div className="lg:w-1/2 text-center lg:text-left">
-            <h1 className="text-4xl md:text-6xl font-bold text-stone-800 leading-tight mb-8 font-display">
-              O Software Inteligente que Faz Sua <span className="text-rose-400 italic">Clínica Crescer.</span>
-            </h1>
-            
-            {/* Contêiner do texto com altura mínima para evitar pulos no layout */}
-            <div className="min-h-[120px] md:min-h-[140px] relative">
-              <p className="text-lg md:text-xl text-stone-600 leading-relaxed max-w-xl inline">
-                {typedText}
-                <span 
-                  className={`inline-block w-[3px] h-[1.2em] bg-rose-400 ml-1 align-middle transition-opacity duration-100 ${
-                    isCursorVisible ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  aria-hidden="true"
-                />
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8">
-              <button 
-                onClick={() => window.location.href='https://time-care-web.vercel.app/'}
-                className="bg-rose-400 text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-rose-500 transition-all transform hover:-translate-y-1 shadow-xl shadow-rose-200"
-              >
-                Comece Seu Teste Grátis Agora
-              </button>
-            </div>
-
-            <div className="mt-8 flex items-center justify-center lg:justify-start gap-4 text-stone-400 text-sm italic">
-              <span className="flex items-center gap-1">✨ Simples</span>
-              <span className="flex items-center gap-1">✨ Elegante</span>
-              <span className="flex items-center gap-1">✨ Eficiente</span>
-            </div>
+    <section className="pt-32 pb-20 px-4 overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+        <div className="flex-1 text-center lg:text-left z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-100/80 text-rose-600 font-semibold text-sm mb-6 animate-fade-in border border-rose-200">
+            <Sparkles className="w-4 h-4" />
+            O sistema #1 para profissionais de estética
           </div>
-
-          <div className="lg:w-1/2 relative">
-            <div className="bg-white/40 p-4 rounded-[3rem] backdrop-blur-sm shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
-              <div className="relative overflow-hidden rounded-[2rem]">
-                 <img 
-                  src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=1000" 
-                  className="w-full object-cover h-[350px] md:h-[500px]" 
-                  alt="Interface TimeCare em um Tablet" 
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-slate-900 leading-[1.05] mb-6">
+            Sua agenda organizada, <br />
+            <span className="text-rose-500 italic">seu tempo valorizado.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+            O Time Care é a solução completa para gestão de clínicas e salões. Automatize seus agendamentos, controle seu financeiro e foque no cuidado que seus clientes merecem.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
+            <button 
+              onClick={onStart}
+              className="px-10 py-5 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-bold text-lg transition-all shadow-2xl shadow-rose-300 flex items-center justify-center gap-2 group"
+            >
+              Experimentar Grátis
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button 
+              onClick={onViewDemo}
+              className="px-10 py-5 bg-white border border-rose-100 text-rose-600 hover:bg-rose-50 hover:border-rose-200 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2"
+            >
+              <Play className="w-5 h-5 fill-rose-600" />
+              Ver Vídeo Demo
+            </button>
+          </div>
+          <div className="mt-12 flex items-center justify-center lg:justify-start gap-5">
+            <div className="flex -space-x-3">
+              {[1, 2, 3, 4].map((i) => (
+                <img
+                  key={i}
+                  src={`https://i.pravatar.cc/150?u=timecare${i}`}
+                  alt="Usuário satisfeito"
+                  className="w-12 h-12 rounded-full border-4 border-white shadow-lg"
                 />
-                {/* Overlay sutil para dar profundidade */}
-                <div className="absolute inset-0 bg-gradient-to-t from-rose-200/20 to-transparent"></div>
-              </div>
+              ))}
             </div>
-            
-            {/* Badge flutuante otimizada */}
-            <div className="absolute -bottom-8 -left-4 bg-white/95 backdrop-blur p-6 rounded-3xl shadow-2xl hidden md:block border border-rose-50 animate-bounce-slow">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-rose-50 rounded-2xl flex items-center justify-center">
-                  <span className="text-rose-400 text-xl font-bold">10s</span>
-                </div>
-                <div>
-                  <p className="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Agilidade TimeCare</p>
-                  <p className="font-bold text-stone-800">Agendamento concluído</p>
+            <p className="text-sm text-slate-500 font-medium">
+              <span className="font-bold text-slate-800 text-base block md:inline">+2.000 especialistas</span> já transformaram seus negócios
+            </p>
+          </div>
+        </div>
+        
+        <div className="flex-1 relative">
+          <div className="absolute -z-10 -top-10 -right-10 w-96 h-96 bg-rose-200/40 rounded-full blur-3xl"></div>
+          <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-rose-100/60 rounded-full blur-3xl"></div>
+          
+          <div className="relative group">
+            <div className="absolute inset-0 bg-rose-400/10 rounded-[2.5rem] blur-xl group-hover:blur-2xl transition-all -z-10"></div>
+            <div className="bg-white p-3 rounded-[2.5rem] shadow-2xl border border-rose-100/50 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
+              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3]">
+                {/* High-quality aesthetics clinic image */}
+                <img 
+                  src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=1200" 
+                  alt="Estética de luxo e tecnologia" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center">
+                        <Sparkles className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-slate-900 uppercase tracking-wider">Dashboard Inteligente</p>
+                        <p className="text-sm text-slate-600">Gestão 360° para seu sucesso</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      {/* Background Decorativo Refinado */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-200/20 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-100/30 rounded-full blur-[100px] -z-10 -translate-x-1/4 translate-y-1/4"></div>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 4s infinite ease-in-out;
-        }
-      `}} />
-    </div>
+    </section>
   );
 };
+
+export default Hero;
